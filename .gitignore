@@ -1,0 +1,6 @@
+# work space folder
+stage/
+
+# intellij
+.idea/
+*.iml
