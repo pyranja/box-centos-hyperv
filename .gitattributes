@@ -1,0 +1,11 @@
+# enable git auto handling
+* text=auto
+
+# force LF endings for source files
+*.java  eol=lf
+*.sh    eol=lf
+*.xml   eol=lf
+*.js    eol=lf
+*.cfg   eol=lf
+*.json  eol=lf
+*.md    eol=lf
