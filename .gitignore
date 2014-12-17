@@ -1,5 +1,6 @@
-# work space folder
+# work space folder and boxes
 stage/
+*.box
 
 # intellij
 .idea/
