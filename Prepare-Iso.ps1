@@ -5,7 +5,7 @@
 
 [CmdletBinding()]
 Param (
-  [Parameter()] [string] $OsVersion = "6.6"
+  [Parameter()] [string] $OsVersion = "6.8"
   , [Parameter()] [string] $OsArchitecture = "x86_64"
   , [Parameter()] [string] $OsMirror = "http://gd.tuwien.ac.at/opsys/linux/centos"
 )
@@ -48,7 +48,7 @@ Copy-Item -Force -Path ks.cfg -Destination ${IsoWorkDir}
 
 # repack iso
 Write-Verbose "repackage installation image"
-mkisofs --verbose -r -N -L -d -J -T -b isolinux/isolinux.bin -c isolinux\boot.cat -no-emul-boot -V centos-netinstall-ks -boot-load-size 4 -boot-info-table -o ${InstallIso} ${IsoWorkDir}
+mkisofs --verbose -r -N -allow-leading-dots -d -J -T -b isolinux/isolinux.bin -c isolinux\boot.cat -no-emul-boot -V centos-netinstall-ks -boot-load-size 4 -boot-info-table -o ${InstallIso} ${IsoWorkDir}
 
 # clean up
 Remove-Item -Recurse -Path ${IsoWorkDir}
