@@ -1,4 +1,4 @@
-vbox-centos6-hyperv
-===================
+box-centos-hyperv
+=================
 
-Resources for creating a CentOs6 Vagrant box for HyperV
+Resources for creating CentOS vagrant boxes using the HyperV provider.
