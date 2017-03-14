@@ -1,7 +1,16 @@
-# work space folder and boxes
-stage/
-*.box
-
-# intellij
+# intellij #
 .idea/
 *.iml
+*.ipr
+*.iws
+
+# eclipse #
+.settings/
+.project
+.classpath
+
+# vagrant #
+.vagrant
+
+# osx #
+.DS_Store

@@ -1,11 +1,17 @@
 # enable git auto handling
 * text=auto
 
-# force LF endings for source files
-*.java  eol=lf
-*.sh    eol=lf
-*.xml   eol=lf
-*.js    eol=lf
-*.cfg   eol=lf
-*.json  eol=lf
-*.md    eol=lf
+# force endings for some platform specific files
+*.md      eol=lf
+*.sh      eol=lf
+*.xml     eol=lf
+*.json    eol=lf
+*.sql     eol=lf
+
+*.ps1     eol=crlf
+*.psm1    eol=crlf
+*.psd1    eol=crlf
+*.ps1xml  eol=crlf
+*.bat     eol=crlf
+
+*.pdf     -text
