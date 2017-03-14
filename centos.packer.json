@@ -1,0 +1,63 @@
+{
+  "builders": [
+    { 
+      "vm_name": "{{ user `vm_name` }}",
+      "type": "hyperv-iso",
+      "generation": "2",
+      "cpu": "{{ user `cpus` }}",
+      "ram_size": "{{ user `memory` }}",
+      "disk_size": "{{ user `disk_size` }}",
+      "iso_urls": [ "http://mirrors.sonic.net/centos/7.3.1611/isos/x86_64/CentOS-7-x86_64-DVD-1611.iso" ],
+      "iso_checksum": "c018577c75b2434fbb2c324789dee0ba887d9c32",
+      "iso_checksum_type": "sha1",
+      "boot_command": [
+        "<wait>c",
+        "<wait>linuxefi /images/pxeboot/vmlinuz inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter>",
+        "<wait>initrdefi /images/pxeboot/initrd.img<enter>",
+        "<wait>boot<enter>"
+      ],
+      "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
+      "http_directory": ".",
+      "ssh_password": "{{ user `ssh_password` }}",
+      "ssh_username": "{{ user `ssh_username` }}",
+      "guest_additions_mode": "none",
+      "communicator": "ssh",
+      "ssh_timeout": "1h"
+    }
+  ],
+  "post-processors": [
+    {
+      "keep_input_artifact": false,
+      "output": "target/{{.Provider}}-{{user `vm_name`}}-{{user `version`}}.box",
+      "type": "vagrant"
+    }
+  ],
+  "provisioners": [
+    {
+      "environment_vars": [
+        "SSH_USERNAME={{user `ssh_username`}}",
+        "SSH_PASSWORD={{user `ssh_password`}}",
+        "UPDATE=true",
+        "INSTALL_VAGRANT_KEY=true"
+      ],
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+      "scripts": [
+        "script/sshd.sh",
+        "script/update.sh",
+        "script/vagrant.sh",
+        "script/motd.sh",
+        "script/cleanup.sh"
+      ],
+      "type": "shell"
+    }
+  ],
+  "variables": {
+    "vm_name": "centos7",
+    "version": "0.1.0",
+    "cpus": "1",
+    "memory": "512",
+    "disk_size": "20480",
+    "ssh_password": "vagrant",
+    "ssh_username": "vagrant"
+  }
+}
