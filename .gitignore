@@ -1,3 +1,7 @@
+# packer #
+packer_cache/
+target/
+
 # intellij #
 .idea/
 *.iml
