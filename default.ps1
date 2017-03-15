@@ -13,6 +13,10 @@ FormatTaskName "box-centos-hyperv::{0}"
 
 Task Default -Depends Packer
 
+Task Clean -description "clear transient workspace data" {
+    Remove-Item -Recurse -Force -ErrorAction SilentlyContinue .\target
+}
+
 Task Packer -description "run packer build" {
     Exec { packer build -var "version=$version" .\centos.packer.json }
 }
