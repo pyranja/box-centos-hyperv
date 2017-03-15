@@ -17,28 +17,28 @@
         "<wait>boot<enter>"
       ],
       "shutdown_command": "echo 'vagrant'|sudo -S shutdown -P now",
-      "http_directory": ".",
+      "http_directory": "config",
       "ssh_password": "{{ user `ssh_password` }}",
       "ssh_username": "{{ user `ssh_username` }}",
       "guest_additions_mode": "none",
       "communicator": "ssh",
-      "ssh_timeout": "1h"
+      "ssh_timeout": "20m"
     }
   ],
   "post-processors": [
     {
+      "type": "vagrant",
+      "output": "target/{{user `vm_name`}}.{{.Provider}}.box",
+      "compression_level": 9,
       "keep_input_artifact": false,
-      "output": "target/{{.Provider}}-{{user `vm_name`}}-{{user `version`}}.box",
-      "type": "vagrant"
+      "vagrantfile_template": "config/Vagrantfile.template"
     }
   ],
   "provisioners": [
     {
       "environment_vars": [
         "SSH_USERNAME={{user `ssh_username`}}",
-        "SSH_PASSWORD={{user `ssh_password`}}",
-        "UPDATE=true",
-        "INSTALL_VAGRANT_KEY=true"
+        "SSH_PASSWORD={{user `ssh_password`}}"
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
       "scripts": [
