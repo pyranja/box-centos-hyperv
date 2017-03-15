@@ -5,10 +5,6 @@ Set-StrictMode -Version "Latest"
     .SYNOPSIS packer build script
 #>
 
-Properties {
-    $version = [Version]"0.0.0"
-}
-
 FormatTaskName "box-centos-hyperv::{0}"
 
 Task Default -Depends Packer, AddBox
@@ -18,7 +14,7 @@ Task Clean -description "clear transient workspace data" {
 }
 
 Task Packer -description "run packer build" {
-    Exec { packer build -var "version=$version" .\centos.packer.json }
+    Exec { packer build .\centos.packer.json }
 }
 
 Task AddBox -description "add packed box to local vagrant installation" {

@@ -53,7 +53,6 @@
   ],
   "variables": {
     "vm_name": "centos7",
-    "version": "0.1.0",
     "cpus": "1",
     "memory": "512",
     "disk_size": "20480",
