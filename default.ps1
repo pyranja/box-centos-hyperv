@@ -11,7 +11,7 @@ Properties {
 
 FormatTaskName "box-centos-hyperv::{0}"
 
-Task Default -Depends Packer
+Task Default -Depends Packer, AddBox
 
 Task Clean -description "clear transient workspace data" {
     Remove-Item -Recurse -Force -ErrorAction SilentlyContinue .\target
